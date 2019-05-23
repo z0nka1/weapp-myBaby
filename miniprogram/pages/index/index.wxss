@@ -1,0 +1,18 @@
+page{
+  padding: 80rpx 20rpx 20rpx 20rpx;
+  box-sizing: border-box;
+}
+view{
+  margin-bottom: 16rpx;
+}
+
+button{
+  display: inline-block;
+  background-color: orangered;
+  color: white;
+  border-radius: 26px;
+}
+
+button:nth-of-type(1){
+  margin-right: 20rpx;
+}

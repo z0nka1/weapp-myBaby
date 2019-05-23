@@ -1,0 +1,85 @@
+/**app.wxss**/
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.float-right {
+  float: right;
+}
+
+.card {
+  width: 100%;
+  padding: 18rpx;
+  margin-bottom: 10px;
+  background-color: white;
+  border-radius: 6px;
+  border: 1px solid #e6e6e6;
+  box-sizing: border-box;
+}
+
+.grey-text {
+  color: #777;
+}
+
+.small {
+  font-size: 30rpx;
+}
+
+picker.custom_picker, input.custom_input {
+  width: 100%;
+  padding: 20rpx;
+  box-sizing: border-box;
+}
+
+picker.custom_picker {
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 20rpx;
+}
+
+input.custom_input {
+  border: 1px solid #ccc;
+  padding-top: 0;
+  padding-bottom: 0;
+  border-radius: 40px;
+  height: 86rpx;
+}
+
+.my_btn {
+  background-color: orangered;
+  color: white;
+  border-radius: 3px;
+}
+
+.search_area {
+  width: 100%;
+  background-color: white;
+  padding: 20rpx;
+  padding-top: 0;
+}
+
+.relative {
+  position: relative;
+}
+
+.center{
+  text-align: center;
+}
+.btn_hover{
+  background-color: rgb(219, 58, 0);
+}
+
+.icon {
+  width: 32rpx;
+  height: 32rpx;
+  margin-right: 10rpx;
+  vertical-align: baseline;
+}
+
+.arrow_right {
+  margin-left: 20rpx;
+  height: 50rpx;
+}

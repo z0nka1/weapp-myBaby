@@ -1,0 +1,18 @@
+<view class='container'>
+  <view class='search_area'>
+    <form bindsubmit='registry' report-submit='true'>
+      <picker class='custom_picker' mode="region" name='region' custom-item="全部" bindchange='onRegionChange'>
+        <view>
+          <text wx:if="{{!region[0]}}">省市区</text>
+          <text wx:if="{{region[0]}}">{{region[0]}}{{region[1]}}{{region[2]}}</text>
+          <image class='icon arrow_right float-right' mode='aspectFit' src='../../images/arrow_right.png'></image>
+          <text wx:if="{{!region[0]}}" class='grey-text float-right'>请选择</text>
+        </view>
+      </picker>
+      <input class='custom_input' placeholder='详细地址' name='address'></input>
+      <input class='custom_input' placeholder='酒店名称' cursor-spacing='480rpx' name='hotelName'></input>
+      <textarea placeholder='问题描述。比如床单不干净、隔音差、噪声大等' cursor-spacing='400rpx' show-confirm-bar='{{false}}' name='desc'></textarea>
+      <button class='my_btn' hover-class='btn_hover' loading='{{loading}}' form-type='submit'>提交</button>
+    </form>
+  </view>
+</view>

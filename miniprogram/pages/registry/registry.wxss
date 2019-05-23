@@ -1,0 +1,20 @@
+page {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.container>view{
+  box-sizing:border-box;
+}
+
+input, textarea{
+  margin-bottom: 20rpx;
+}
+
+textarea{
+  width:100%;
+  border:2rpx solid #ccc;
+  border-radius:8px;
+  padding:20rpx;
+  box-sizing:border-box;
+}

@@ -1,0 +1,59 @@
+<view class='container'>
+  <view class="search_area">
+    <picker class='custom_picker' mode="region" custom-item="全部" bindchange='onRegionChange'>
+      <view>
+        <text wx:if="{{!region[0]}}">省市区</text>
+        <text wx:if="{{region[0]}}">{{region[0]}} {{region[1]}} {{region[2]}}</text>
+        <image class='icon arrow_right float-right' mode='aspectFit' src='../../images/arrow_right.png'></image>
+        <text wx:if="{{!region[0]}}" class='grey-text float-right'>请选择</text>
+      </view>
+    </picker>
+    <view id='hotel_view'>
+      <input placeholder='酒店名称' confirm-type='search' bindconfirm='searchHandler' bindinput='onHotelInput'></input>
+      <text class='search_btn' bindtap='searchHandler'>搜索</text>
+    </view>
+  </view>
+
+  <view id='card_container'>
+    <view class='card' data-hotel='{{item}}' wx:for="{{queryResult}}" wx:key="{{item._id}}" bindtap='viewDetail'>
+      <view>
+        <image class='icon' mode='aspectFit' src='../../images/house.png'></image>
+        <text>{{item.hotelName}}</text>
+        <text class='small grey-text float-right'>{{item.registryDate}}</text>
+      </view>
+      <view>
+        <image class='icon' mode='aspectFit' src='../../images/map_marker.png'></image>
+        <text class='grey-text small'>{{item.region[0]}}{{item.region[1]}}{{item.region[2]}} {{item.address}}</text>
+      </view>
+      <view wx:if="{{item.avatarUrl || item.nickName}}">
+        <image class='avatar' src="{{item.avatarUrl}}"></image>
+        <text class='grey-text small'>{{item.nickName}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view wx:if="{{!queryResult.length}}">
+    <text class='grey-text small'>暂无数据</text>
+  </view>
+  <view wx:if="{{noMoreData && queryResult.length}}">
+    <text class='grey-text small'>没有更多了</text>
+  </view>
+</view>
+
+<view id='cover_view_container' wx:if="{{showModal}}" bindtap='onCoverContainerTap'>
+  <view id='cover_view' catchtap='catchCoverTap'>
+    <view class='center' id='hotel_name'>
+      <image class='icon' mode='aspectFit' src='../../images/house.png'></image>
+      <text>{{currentHotelName}}</text>
+    </view>
+    <view class='center small grey-text' id='hotel_address'>
+      <image class='icon' mode='aspectFit' src='../../images/map_marker.png'></image>
+      <text>{{currentHotelRegion[0]}}{{currentHotelRegion[1]}}{{currentHotelRegion[2]}} {{currentHotelAddress}}</text>
+    </view>
+    <view id='hotel_desc'>
+      <image class='avatar' src="{{currentAvatarUrl || '../../images/user-unlogin.png'}}"></image>
+      <text class='grey-text small'>{{currentNickName || '未知网友'}}：</text>
+      <text class='small'>{{currentHotelDesc}}</text>
+    </view>
+  </view>
+</view>
