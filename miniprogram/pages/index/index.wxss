@@ -1,18 +1,104 @@
-page{
-  padding: 80rpx 20rpx 20rpx 20rpx;
+page {
+  background: #f6f6f6;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.container {
+  padding-bottom: 60rpx;
+}
+
+.container>view {
   box-sizing: border-box;
 }
-view{
-  margin-bottom: 16rpx;
+
+#hotel_view {
+  border: 1px solid #ccc;
+  border-radius: 40px;
+  padding-left: 20rpx;
+  height: 72rpx;
 }
 
-button{
+#hotel_view>input {
+  width: 84%;
   display: inline-block;
+  height: 72rpx;
+  line-height: 72rpx;
+}
+
+.search_area {
+  position: fixed;
+}
+
+#card_container {
+  width: 100%;
+  padding: 20rpx;
+  /* padding-top: 120rpx; */
+}
+
+#cover_view_container {
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.4);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#cover_view {
+  width: calc(100% - 140rpx);
+  min-height: 30%;
+  max-height: 60%;
+  background-color: white;
+  padding: 30rpx;
+  border-radius: 15px;
+  margin-top: -200rpx;
+}
+
+#hotel_name {
+  margin-bottom: 12rpx;
+}
+
+#hotel_address {
+  margin-bottom: 20rpx;
+}
+
+.card_hover {
+  background-color: #eee;
+}
+
+image {
+  width: 200rpx;
+  height: 150rpx;
+  margin-right: 10rpx;
+  margin-bottom: 20rpx;
+  border-radius: 5rpx;
+  vertical-align: bottom;
+}
+
+video {
+  width: 100%;
+}
+
+.search_btn {
+  width: 16%;
+  display: inline-block;
+  text-align: center;
   background-color: orangered;
   color: white;
-  border-radius: 26px;
+  height: 72rpx;
+  vertical-align: top;
+  border-radius: 0 40px 40px 0;
+  line-height: 72rpx;
 }
 
-button:nth-of-type(1){
-  margin-right: 20rpx;
+#hotel_desc {
+  overflow: auto;
+  height: calc(100% - 170rpx);
+}
+
+.remark {
+  margin-bottom: 20rpx;
 }

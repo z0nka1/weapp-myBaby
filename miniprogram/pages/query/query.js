@@ -31,15 +31,6 @@ Page({
     this.data.hotelNameStr = e.detail.value;
   },
 
-  onRegionChange: function(e){
-    let codeArr = e.detail.code;
-    let req = this.data.reqParams;
-    [req.provinceCode, req.cityCode, req.areaCode] = e.detail.code;
-    this.setData({
-      region: e.detail.value
-    });
-  },
-
   searchHandler: function() {
     this.setData({
       queryResult: [],

@@ -2,14 +2,34 @@
   "pages": [
     "pages/index/index",
     "pages/registry/registry",
-    "pages/query/query"
+    "pages/query/query",
+    "pages/management/management"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#F6F6F6",
-    "navigationBarTitleText": "差评酒店",
+    "navigationBarBackgroundColor": "#FFFFFF",
+    "navigationBarTitleText": "首页",
     "navigationBarTextStyle": "black"
   },
-  "sitemapLocation": "sitemap.json"
+  "sitemapLocation": "sitemap.json",
+  "tabBar": {
+    "color": "#cccccc",
+    "selectedColor": "#4CAF50",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "images/home.png",
+        "selectedIconPath": "images/home_selected.png"
+      },
+      {
+        "pagePath": "pages/management/management",
+        "text": "上传",
+        "iconPath": "images/cloud.png",
+        "selectedIconPath": "images/cloud_selected.png"
+      }
+    ]
+  }
 }

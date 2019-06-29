@@ -1,18 +1,40 @@
-<!--index.wxml-->
-<view>
-  <view>
-    <view class='center'>
-      <text>这是一个关于酒店差评的平台</text>
+<view class='container'>
+  <!-- <view class="search_area">
+    <view id='hotel_view'>
+      <input placeholder='根据备注搜索' confirm-type='search' bindconfirm='searchHandler' bindinput='onRemarkInput'></input>
+      <text class='search_btn' bindtap='searchHandler'>搜索</text>
     </view>
-    <view class='center'>
-      <text>在这里，你可以尽情吐槽那些住过的酒店</text>
+  </view> -->
+
+  <view id='card_container'>
+    <view class='card' data-hotel='{{item}}' wx:for="{{queryResult}}" wx:key="{{item._id}}">
+      <view class='remark'>
+        <text class='grey-text small'>{{item.remark}}</text>
+      </view>
+      <view>
+        <image
+          wx:for="{{item.imageIDList}}"
+          wx:for-item="img"
+          src="{{img}}"
+          mode="aspectFill"
+          data-idlist="{{item.imageIDList}}"
+          data-idx="{{index}}"
+          bindtap='previewImage'
+        ></image>
+      </view>
+      <view>
+        <video wx:for="{{item.videoIDList}}" wx:for-item="video" src="{{video}}"></video>
+      </view>
+      <view>
+        <text class='grey-text small'>{{item.date}}</text>
+      </view>
     </view>
-    <view class='center'>
-      <text>当然，如果你正打算订酒店，这里的信息也可以供你参考</text>
-    </view>
-    <view class='center'>
-      <button hover-class='btn_hover' open-type='getUserInfo' bindgetuserinfo='onGetUserInfo'>吐槽一下</button>
-      <button hover-class='btn_hover' bindtap='goToQuery'>前往查询</button>
-    </view>
+  </view>
+
+  <view wx:if="{{!queryResult.length}}">
+    <text class='grey-text small'>暂无数据</text>
+  </view>
+  <view wx:if="{{noMoreData && queryResult.length}}">
+    <text class='grey-text small'>没有更多了</text>
   </view>
 </view>

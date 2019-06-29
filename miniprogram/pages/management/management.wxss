@@ -1,0 +1,40 @@
+page {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.container>view{
+  box-sizing:border-box;
+}
+
+input, textarea{
+  margin-bottom: 20rpx;
+}
+
+textarea{
+  width:100%;
+  padding:20rpx;
+  box-sizing:border-box;
+  background-color: #f8f8f8;
+}
+
+button {
+  color: white;
+  background-color: #4CAF50;
+  border: none;
+}
+
+.upload_icon {
+  border: 1px solid #ccc;
+  padding: 6rpx;
+  border-radius: 3px;
+  display: inline-block;
+  margin-bottom: 10rpx;
+  margin-right: 10rpx;
+}
+
+.upload_icon > image, .upload_icon > video {
+  width: 48px;
+  height: 48px;
+  vertical-align: bottom;
+}

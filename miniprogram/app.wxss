@@ -16,8 +16,8 @@
   padding: 18rpx;
   margin-bottom: 10px;
   background-color: white;
-  border-radius: 6px;
-  border: 1px solid #e6e6e6;
+  border-radius: 2px;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
   box-sizing: border-box;
 }
 
@@ -48,12 +48,6 @@ input.custom_input {
   height: 86rpx;
 }
 
-.my_btn {
-  background-color: orangered;
-  color: white;
-  border-radius: 3px;
-}
-
 .search_area {
   width: 100%;
   background-color: white;
@@ -67,9 +61,6 @@ input.custom_input {
 
 .center{
   text-align: center;
-}
-.btn_hover{
-  background-color: rgb(219, 58, 0);
 }
 
 .icon {
