@@ -197,5 +197,14 @@ Page({
       urls: pathList,
       current: pathList[idx]
     })
+  },
+
+  onPullDownRefresh: function() {
+    this.setData({
+      queryResult: [],
+      pageIndex: 0,
+      noMoreData: false
+    });
+    this.queryData();
   }
 })

@@ -10,7 +10,8 @@
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#FFFFFF",
     "navigationBarTitleText": "首页",
-    "navigationBarTextStyle": "black"
+    "navigationBarTextStyle": "black",
+    "enablePullDownRefresh": true
   },
   "sitemapLocation": "sitemap.json",
   "tabBar": {
