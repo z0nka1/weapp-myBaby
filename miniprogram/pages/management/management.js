@@ -15,9 +15,9 @@ Page({
   },
 
   submitHandler: function (e) {
-    // if (!this.data.imageIDList.length && !this.data.videoIDList.length) {
-    //   return;
-    // }
+    if (!this.data.imageIDList.length && !this.data.videoIDList.length) {
+      return;
+    }
     const formData = e.detail.value;
     const db = wx.cloud.database();
     const now = new Date();
@@ -47,7 +47,12 @@ Page({
           title: '提交成功',
         });
         this.setData({
-          loading: false
+          loading: false,
+          remark: '',
+          imageIDList: [],
+          videoIDList: [],
+          tempImagePaths: [],
+          tempVideoPaths: []
         });
         setTimeout(() => {
           wx.switchTab({
@@ -57,7 +62,6 @@ Page({
         const args = {
           formId: e.detail.formId
         }
-        this.dispatchTemplateMessage(args);
       },
 
       fail: err => {
@@ -93,17 +97,22 @@ Page({
         that.setData({
           tempImagePaths: path
         })
-        console.log(res);
-        files.forEach(item => {
-          const path = item.match(/.{10}(?=png)/)[0] + 'png';
+        console.log('files', files);
+        for (let i = 0; i < files.length; i++) {
+          const path = files[i].substr(30,  10);
+          console.log(files[i]);
           wx.cloud.uploadFile({
-            filePath: item,
+            filePath: files[i],
             cloudPath: path,
             success: res => {
+              console.log(res.fileID);
               list.push(res.fileID);
-              this.setData({
+              that.setData({
                 imageIDList: list
               });
+              wx.showToast({
+                title: '上传成功',
+              })
             },
             fail: err => {
               wx.showToast({
@@ -112,7 +121,7 @@ Page({
               })
             }
           })
-        })
+        }
       },
       fail: function(err) {
         wx.showToast({
@@ -137,7 +146,7 @@ Page({
         const path = res.tempFilePath;
         const thumbTempFilePath = res.thumbTempFilePath;
         const cloudPath = path.substr(30, 10);
-        pathList = [...pathList, path];
+        pathList = [...pathList, {temPath: path, thumb: thumbTempFilePath}];
         that.setData({
           tempVideoPaths: pathList
         })
@@ -146,7 +155,7 @@ Page({
           cloudPath: cloudPath,
           success: res => {
             list.push(res.fileID);
-            this.setData({
+            that.setData({
               videoIDList: list
             });
           },

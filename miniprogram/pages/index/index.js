@@ -137,8 +137,10 @@ Page({
         console.log(res.data)
         let totalData = this.data.queryResult.concat(res.data);
         totalData.forEach(item => {
-          let date = new Date(item.createDate).toLocaleDateString();
-          item['date'] = date;
+          let date = new Date(item.createDate);
+          if (date) {
+            item.date = `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDay()} ${date.getHours()}:${date.getMinutes()}`;
+          }
         })
         this.setData({
           queryResult: totalData,
@@ -165,6 +167,7 @@ Page({
    */
   onLoad: function (options) {
     this.queryData();
+    console.log(options)
   },
 
   onCoverContainerTap: function () {

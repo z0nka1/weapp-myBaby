@@ -7,7 +7,7 @@
   </view> -->
 
   <view id='card_container'>
-    <view class='card' data-hotel='{{item}}' wx:for="{{queryResult}}" wx:key="{{item._id}}">
+    <view class='card' wx:for="{{queryResult}}" wx:key="{{item._id}}">
       <view class='remark'>
         <text class='grey-text small'>{{item.remark}}</text>
       </view>
@@ -23,7 +23,7 @@
         ></image>
       </view>
       <view>
-        <video wx:for="{{item.videoIDList}}" wx:for-item="video" src="{{video}}"></video>
+        <video wx:for="{{item.videoIDList}}" wx:for-item="video" wx:for-index="idx" src="{{video}}"></video>
       </view>
       <view>
         <text class='grey-text small'>{{item.date}}</text>
