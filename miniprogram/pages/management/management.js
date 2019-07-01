@@ -88,37 +88,33 @@ Page({
 
   chooseImage: function () {
     let list = this.data.imageIDList;
-    let path = this.data.tempImagePaths;
+    let tempPath = this.data.tempImagePaths;
     const that = this;
     wx.chooseImage({
       success: function(res) {
         const files = res.tempFilePaths;
-        path = [...path, ...files];
-        that.setData({
-          tempImagePaths: path
-        })
-        console.log('files', files);
+        tempPath = [...tempPath, ...files];
         for (let i = 0; i < files.length; i++) {
-          const path = files[i].substr(30,  10);
-          console.log(files[i]);
+          const pathList = files[i].split('.');
           wx.cloud.uploadFile({
             filePath: files[i],
-            cloudPath: path,
+            cloudPath: pathList[2] + '' + pathList[3],
             success: res => {
-              console.log(res.fileID);
               list.push(res.fileID);
               that.setData({
-                imageIDList: list
+                imageIDList: list,
+                tempImagePaths: tempPath
               });
               wx.showToast({
-                title: '上传成功',
+                title: '图片上传成功',
               })
             },
             fail: err => {
               wx.showToast({
-                title: err.errMsg,
+                title: '图片上传失败',
                 icon: 'none'
-              })
+              });
+              console.log(err);
             }
           })
         }
@@ -138,32 +134,33 @@ Page({
 
   chooseVideo: function () {
     let list = this.data.videoIDList;
-    let pathList = this.data.tempVideoPaths;
+    let tempPath = this.data.tempVideoPaths;
     const that = this;
     wx.chooseVideo({
       success: function (res) {
-        console.log(res);
         const path = res.tempFilePath;
         const thumbTempFilePath = res.thumbTempFilePath;
-        const cloudPath = path.substr(30, 10);
-        pathList = [...pathList, {temPath: path, thumb: thumbTempFilePath}];
-        that.setData({
-          tempVideoPaths: pathList
-        })
+        const cloudPath = path.split('.');
+        tempPath = [...tempPath, {temPath: path, thumb: thumbTempFilePath}];
         wx.cloud.uploadFile({
           filePath: path,
-          cloudPath: cloudPath,
+          cloudPath: cloudPath[2] + '' + cloudPath[3],
           success: res => {
             list.push(res.fileID);
             that.setData({
-              videoIDList: list
+              videoIDList: list,
+              tempVideoPaths: tempPath
             });
+            wx.showToast({
+              title: '视频上传成功',
+            })
           },
           fail: err => {
             wx.showToast({
-              title: err.errMsg,
+              title: '视频上传失败',
               icon: 'none'
-            })
+            });
+            console.log(err);
           }
         })
       },
@@ -175,4 +172,11 @@ Page({
       }
     })
   },
+
+  onShareAppMessage: function (e) {
+    return {
+      title: '爸比&妈咪倾情奉献',
+      imageUrl: '../../images/pink_panther.png'
+    }
+  }
 })

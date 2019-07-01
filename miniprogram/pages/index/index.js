@@ -138,8 +138,9 @@ Page({
         let totalData = this.data.queryResult.concat(res.data);
         totalData.forEach(item => {
           let date = new Date(item.createDate);
+          let minutes = date.getMinutes();
           if (date) {
-            item.date = `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDay()} ${date.getHours()}:${date.getMinutes()}`;
+            item.date = `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()} ${date.getHours()}:${minutes > 9 ? minutes : '0' + minutes}`;
           }
         })
         this.setData({
@@ -167,7 +168,6 @@ Page({
    */
   onLoad: function (options) {
     this.queryData();
-    console.log(options)
   },
 
   onCoverContainerTap: function () {
@@ -209,5 +209,12 @@ Page({
       noMoreData: false
     });
     this.queryData();
+  },
+
+  onShareAppMessage: function(e) {
+    return {
+      title: '爸比&妈咪倾情奉献',
+      imageUrl: '../../images/pink_panther.png'
+    }
   }
 })

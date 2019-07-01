@@ -20,8 +20,9 @@ textarea{
 
 button {
   color: white;
-  background-color: #4CAF50;
+  background-color: #FF8434;
   border: none;
+  border-radius: 50rpx;
 }
 
 .upload_icon {
