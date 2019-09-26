@@ -17,7 +17,7 @@
       </view>
     </view>
     <form bindsubmit='submitHandler' report-submit='true'>
-      <textarea bindinput='onRemarkInput' placeholder='可以添加备注'></textarea>
+      <textarea value='{{remark}}' bindinput='onRemarkInput' placeholder='可以添加备注'></textarea>
       <button hover-class='btn_hover' loading='{{loading}}' form-type='submit'>提交</button>
     </form>
   </view>

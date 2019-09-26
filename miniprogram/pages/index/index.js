@@ -91,7 +91,8 @@ Page({
 
     showModal: false,
     pageIndex: 0,
-    noMoreData: false
+    noMoreData: false,
+    loading: false
   },
 
   onRemarkInput: function (e) {
@@ -99,12 +100,7 @@ Page({
   },
 
   searchHandler: function () {
-    this.setData({
-      queryResult: [],
-      pageIndex: 0,
-      noMoreData: false
-    });
-    this.queryData();
+    this.refresh();
   },
 
   queryData: function () {
@@ -128,6 +124,9 @@ Page({
       title: '正在搜索...',
       mask: true
     });
+    this.setData({
+      loading: true
+    })
     db.collection('myBaby')
       .where(params)
       .orderBy('createDate', 'desc')
@@ -145,19 +144,19 @@ Page({
         })
         this.setData({
           queryResult: totalData,
-          pageIndex: ++this.data.pageIndex
+          pageIndex: ++this.data.pageIndex,
+          loading: false,
+          noMoreData: res.data && res.data.length < 10
         });
         wx.hideLoading();
-        if (res.data && res.data.length < 10) {
-          this.setData({
-            noMoreData: true
-          })
-        }
       }).catch(err => {
         wx.showToast({
           title: '查询出错',
           icon: 'none'
         });
+        this.setData({
+          loading: false
+        })
         wx.hideLoading();
         console.log(err)
       })
@@ -203,6 +202,13 @@ Page({
   },
 
   onPullDownRefresh: function() {
+    this.refresh();
+    setTimeout(() => {
+      wx.stopPullDownRefresh();
+    }, 1000)
+  },
+
+  refresh: function() {
     this.setData({
       queryResult: [],
       pageIndex: 0,
@@ -213,8 +219,38 @@ Page({
 
   onShareAppMessage: function(e) {
     return {
-      title: '爸比&妈咪倾情奉献',
-      imageUrl: '../../images/pink_panther.png'
+      title: '小语|成长瞬间',
+      imageUrl: '../../images/cover.png'
     }
+  },
+
+  onLongPress: function(e) {
+    const db = wx.cloud.database();
+    const id = e.currentTarget.dataset.id;
+    const that = this;
+    wx.showModal({
+      title: '提示',
+      content: '确定删除该记录？',
+      success: (res) => {
+        if (res.confirm) {
+          db.collection('myBaby').doc(id).remove()
+          .then(res => {
+            let data = this.data.queryResult;
+            data = data.filter(item => item._id !== id);
+            that.setData({
+              queryResult: data
+            });
+            wx.showToast({
+              title: '删除成功',
+            })
+          }).catch(err => {
+            wx.showToast({
+              title: '删除失败',
+              icon: 'none'
+            })
+          })
+        }
+      }
+    })
   }
 })

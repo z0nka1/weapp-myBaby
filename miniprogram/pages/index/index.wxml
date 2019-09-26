@@ -7,7 +7,13 @@
   </view> -->
 
   <view id='card_container'>
-    <view class='card' wx:for="{{queryResult}}" wx:key="{{item._id}}">
+    <view
+      class='card'
+      wx:for="{{queryResult}}"
+      wx:key="{{item._id}}"
+      data-id='{{item._id}}'
+      bindlongpress='onLongPress'
+      >
       <view class='remark'>
         <text class='grey-text small'>{{item.remark}}</text>
       </view>
@@ -31,7 +37,7 @@
     </view>
   </view>
 
-  <view wx:if="{{!queryResult.length}}">
+  <view wx:if="{{!queryResult.length && !loading}}">
     <text class='grey-text small'>暂无数据</text>
   </view>
   <view wx:if="{{noMoreData && queryResult.length}}">

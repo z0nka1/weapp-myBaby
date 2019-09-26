@@ -59,9 +59,6 @@ Page({
             url: '../index/index'
           })
         }, 300);
-        const args = {
-          formId: e.detail.formId
-        }
       },
 
       fail: err => {
@@ -95,10 +92,9 @@ Page({
         const files = res.tempFilePaths;
         tempPath = [...tempPath, ...files];
         for (let i = 0; i < files.length; i++) {
-          const pathList = files[i].split('.');
           wx.cloud.uploadFile({
             filePath: files[i],
-            cloudPath: pathList[2] + '' + pathList[3],
+            cloudPath: that.uuid(),
             success: res => {
               list.push(res.fileID);
               that.setData({
@@ -107,6 +103,7 @@ Page({
               });
               wx.showToast({
                 title: '图片上传成功',
+                icon: 'none'
               })
             },
             fail: err => {
@@ -140,11 +137,10 @@ Page({
       success: function (res) {
         const path = res.tempFilePath;
         const thumbTempFilePath = res.thumbTempFilePath;
-        const cloudPath = path.split('.');
         tempPath = [...tempPath, {temPath: path, thumb: thumbTempFilePath}];
         wx.cloud.uploadFile({
           filePath: path,
-          cloudPath: cloudPath[2] + '' + cloudPath[3],
+          cloudPath: that.uuid(),
           success: res => {
             list.push(res.fileID);
             that.setData({
@@ -153,6 +149,7 @@ Page({
             });
             wx.showToast({
               title: '视频上传成功',
+              icon: 'none'
             })
           },
           fail: err => {
@@ -175,8 +172,12 @@ Page({
 
   onShareAppMessage: function (e) {
     return {
-      title: '爸比&妈咪倾情奉献',
-      imageUrl: '../../images/pink_panther.png'
+      title: '小语|成长瞬间',
+      imageUrl: '../../images/cover.png'
     }
+  },
+
+  uuid: function() {
+    return `${Math.random().toString(36).substr(2)}${Math.random().toString(36).substr(2)}`;
   }
 })
